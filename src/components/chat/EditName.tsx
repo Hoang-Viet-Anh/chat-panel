@@ -27,6 +27,11 @@ export default function EditName() {
     useEffect(() => {
         if (isSuccess && data) {
             dispatch(setCurrentUser(data));
+            addToast({
+                title: 'Success',
+                content: 'User name updated',
+                type: 'success'
+            });
             handleClose(isLoading, setOpen);
         }
         if (isError) {

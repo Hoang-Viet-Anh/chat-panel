@@ -10,6 +10,7 @@ import { chatApi, useCreateChatMutation } from "@/lib/redux/api/chatApi";
 import UserList from "./UserList";
 import useToast from "@/hooks/useToast";
 import { setFilter, setSelectedUser } from "@/lib/redux/slices/userSuggestionSlice";
+import { setDrawerOpen } from "@/lib/redux/slices/appSlice";
 
 export default function AddUser() {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function AddUser() {
                 content: 'Chat created successfully',
                 type: 'success'
             });
+            dispatch(setDrawerOpen(false));
             dispatch(chatApi.util.invalidateTags(['userList']));
         }
         if (isErrorCreatingChat) {
@@ -67,8 +69,8 @@ export default function AddUser() {
     return (
         <>
             <div className="flex flex-row justify-between items-center w-full ">
-                <h1 className="text-cyan-500 text-lg">Find user</h1>
-                <CustomButton type="button" onClick={() => setIsOpen(true)}>
+                <h1 className="hidden lg:block text-cyan-500 text-lg">Find user</h1>
+                <CustomButton type="button" onClick={() => setIsOpen(true)} className="py-2 lg:py-1 w-full lg:w-auto text-nowrap overflow-hidden">
                     Add existing user
                 </CustomButton>
             </div>

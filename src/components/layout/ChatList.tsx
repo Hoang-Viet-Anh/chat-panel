@@ -4,7 +4,7 @@ import { User } from "@/lib/redux/types/User"
 import NavigationElement from "./NavigationElement"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setChats, setUserProfile, setUsers } from "@/lib/redux/slices/appSlice";
+import { setChats, setUnreadCounts, setUserProfile, setUsers } from "@/lib/redux/slices/appSlice";
 import socket from "@/lib/socket/socket";
 import useToast from "@/hooks/useToast";
 import { useGetAllChatsQuery, useGetMeQuery } from "@/lib/redux/api/chatApi";
@@ -32,9 +32,10 @@ export default function ChatList() {
             dispatch(setUserProfile(userProfile));
         }
         if (isSuccessChats && chatsData) {
-            const { chats, users } = chatsData;
+            const { chats, users, unreadCounts } = chatsData;
             dispatch(setChats(chats));
             dispatch(setUsers(users));
+            dispatch(setUnreadCounts(unreadCounts));
             socket.connect();
         }
         if (isErrorUserProfile) {

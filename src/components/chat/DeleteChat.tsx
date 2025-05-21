@@ -44,7 +44,7 @@ export default function DeleteChat() {
     return (
         <>
             <IconButton type="button" className="rounded-lg min-w-fit" onClick={() => setOpen(true)}>
-                <Trash className="w-5 h-5 stroke-red-600" />
+                <Trash className="lg:w-5 lg:h-5 stroke-red-600" />
             </IconButton>
             <CreateChatDialog isOpen={open} handleClose={() => handleClose(isLoading, setOpen)}>
                 <div className="flex flex-row items-center justify-between w-full">

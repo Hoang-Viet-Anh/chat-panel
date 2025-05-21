@@ -10,7 +10,7 @@ type Message = {
     chatId?: string;
     sender?: string;
     content: string;
-    timestamp?: string;
+    createdAt?: string;
     status?: MessageStatus;
 }
 

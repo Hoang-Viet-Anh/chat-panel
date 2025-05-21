@@ -58,14 +58,11 @@ export default function AutomaticMessages() {
 
     return (
         <div className="flex flex-row justify-between items-center w-full">
-            <p className="text-cyan-500 text-lg">Automatic messages</p>
+            <p className="hidden lg:block text-cyan-500 text-lg">Automatic messages</p>
             <CustomButton type="button" onClick={handleClick}
-                className={"rounded-lg transition-all duration-200 " + (isActive ? "text-red-500 border-red-500" : "")} disabled={isLoading1 || isLoading2}>
-                {isActive ?
-                    "Disable"
-                    :
-                    "Enable"
-                }
+                className={"rounded-lg py-2 lg:py-1 w-full lg:w-auto transition-all duration-200 " + (isActive ? "text-red-500 border-red-500" : "")} disabled={isLoading1 || isLoading2}>
+                <p className="hidden lg:block">{isActive ? "Disable" : "Enable"}</p>
+                <p className="lg:hidden text-nowrap overflow-hidden">{isActive ? "Disable" : "Enable"} automatic messages</p>
             </CustomButton>
         </div>
     );

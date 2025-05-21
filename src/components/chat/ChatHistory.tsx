@@ -10,7 +10,6 @@ import MessageComponent from "./MessageComponent";
 
 export default function ChatHistory() {
     const { chatId } = useParams();
-    const { messageRefs } = useScrollToMessage();
     const messages: Message[] = useSelector((state: any) => state.chatRoom.messages);
     const dispatch = useDispatch();
 
@@ -32,7 +31,7 @@ export default function ChatHistory() {
             messages.map((message: Message, index: number) => {
                 return (
                     <div key={message._id ?? index}>
-                        <MessageComponent message={message} ref={messageRefs.current[message._id || '']} />
+                        <MessageComponent message={message} />
                     </div>
                 )
             })

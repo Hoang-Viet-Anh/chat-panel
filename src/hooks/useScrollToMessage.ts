@@ -18,19 +18,6 @@ const useScrollToMessage = () => {
     }
 
     useEffect(() => {
-        if (relatedMessages) {
-            const length = relatedMessages.length;
-            if (length > 0) {
-                const lastMessage = relatedMessages[length - 1];
-                const lastMessageRef = messageRefs.current[lastMessage._id || ''];
-                if (lastMessageRef && lastMessageRef.current) {
-                    lastMessageRef.current.scrollIntoView({ behavior: 'instant' });
-                }
-            }
-        }
-    }, [relatedMessages])
-
-    useEffect(() => {
         if (matchedMessage) {
             const ref = messageRefs.current[matchedMessage._id ?? ''];
             if (ref.current) {

@@ -2,6 +2,7 @@ import { Chat } from '@/lib/redux/types/Chat';
 import { Message } from '@/lib/redux/types/Message';
 import { User } from '@/lib/redux/types/User';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { UnreadCounts } from '../types/UnreadCounts';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,9 +14,9 @@ export const chatApi = createApi({
     }),
     tagTypes: ['chat', 'user', 'message', 'userList'],
     endpoints: (builder) => ({
-        getAllChats: builder.query<{ chats: Chat[], users: User[] }, void>({
+        getAllChats: builder.query<{ chats: Chat[], users: User[], unreadCounts: UnreadCounts[] }, void>({
             query: () => '/chat',
-            transformResponse: (response: { chats: Chat[], users: User[] }) => {
+            transformResponse: (response: { chats: Chat[], users: User[], unreadCounts: UnreadCounts[] }) => {
                 const editedChats = response.chats.map(chat => {
                     if (chat.lastMessage?.timestamp !== undefined) {
                         chat.lastMessage.timestamp = new Date(chat.lastMessage?.timestamp!).toISOString();
@@ -26,6 +27,7 @@ export const chatApi = createApi({
                 return {
                     chats: editedChats,
                     users: response.users,
+                    unreadCounts: response.unreadCounts,
                 }
             },
             providesTags: ['user', 'chat'],
@@ -37,7 +39,7 @@ export const chatApi = createApi({
             }),
             transformResponse: ({ messages, user }: { messages: Message[], user: User }) => {
                 const editedMessages = messages.map(message => {
-                    message.timestamp = new Date(message.timestamp!).toISOString();
+                    message.createdAt = new Date(message.createdAt!).toISOString();
                     return message;
                 })
                 return {
@@ -69,13 +71,13 @@ export const chatApi = createApi({
             }),
             invalidatesTags: ['chat'],
         }),
-        enableAutoMessages: builder.mutation<void, void>({
+        enableAutoMessages: builder.mutation<any, void>({
             query: () => ({
                 url: `/chat/automatic/enable`,
                 method: 'GET',
             }),
         }),
-        disableAutoMessages: builder.mutation<void, void>({
+        disableAutoMessages: builder.mutation<any, void>({
             query: () => ({
                 url: `/chat/automatic/disable`,
                 method: 'GET',

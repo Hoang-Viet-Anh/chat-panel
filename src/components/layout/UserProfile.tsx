@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { CircleAlert, UserRound } from "lucide-react";
 import { useState } from "react";
 import { useGetMeQuery } from "@/lib/redux/api/chatApi";
+import Separator from "../ui/Separator";
 
 const url = process.env.NEXT_PUBLIC_API_URL
 
@@ -28,12 +29,18 @@ export default function UserProfile() {
 
     return (
         <>
-            <div className="flex flex-row justify-between items-center w-full p-4 bg-gray-100">
+            <div className="flex flex-col lg:flex-row lg:justify-between gap-4 lg:gap-0 items-center w-full p-0 lg:p-4 lg:bg-gray-100">
                 <div className="flex flex-row items-center gap-3">
                     {isAuthorized ?
-                        <img src={userProfile?.imageUrl} alt="user avatar" className="w-10 rounded-full bg-white" referrerPolicy="no-referrer" />
+                        <img
+                            src={userProfile?.imageUrl}
+                            onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/user-round1.svg';
+                            }}
+                            alt="user avatar"
+                            className="w-10 h-10 rounded-full bg-white object-cover" referrerPolicy="no-referrer" />
                         :
-                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 lg:bg-white">
                             <UserRound />
                         </div>
                     }
@@ -44,10 +51,12 @@ export default function UserProfile() {
                             userProfile?.firstName}
                     </p>
                 </div>
+                <Separator className="my-1 lg:hidden"/>
                 {isLoading ?
                     <div className="w-20 h-7 bg-gray-300 rounded-lg animate-pulse" />
                     :
-                    <CustomButton type="button" className={isAuthorized ? "border-red-500 text-red-500 w-20" : "w-20"} onClick={handleOpen}>
+                    <CustomButton type="button" className={"w-full lg:w-20 py-2 lg:py-1 " +
+                        (isAuthorized ? "border-red-500 text-red-500" : "")} onClick={handleOpen}>
                         {isAuthorized ? 'Log out' : 'Log in'}
                     </CustomButton>}
             </div>

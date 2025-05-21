@@ -11,7 +11,7 @@ export default function ChatFeaturesBar() {
 
     return (
         <>
-            <div className="flex flex-col justify-center gap-3 items-center w-full pb-4 px-4 bg-gray-100 border-b-2 border-gray-300">
+            <div className="flex flex-col justify-center gap-3 items-center w-full lg:pb-4 lg:px-4 lg:bg-gray-100 lg:border-b-2 border-gray-300">
                 <ChatSearch />
                 <AutomaticMessages />
                 {isAuthorized ?

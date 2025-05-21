@@ -50,13 +50,13 @@ export default function ToastMessage({ toast }: { toast: Toast }) {
     return (
 
         <div onClick={() => navigateToChat(toast.id ?? '', toast.sender)} key={toast.id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            className={"relative flex flex-col gap-2 w-full min-h-20 max-h-40 bg-white rounded-lg p-4 shadow-lg outline-1" +
+            className={"relative flex flex-col gap-2 w-full min-h-20 max-h-40 bg-white rounded-lg p-2 lg:p-4 shadow-lg outline-1" +
                 (toast.type === 'info' ? " outline-gray-600" : "") +
                 (toast.type === 'warning' ? " outline-amber-600" : "") +
                 (toast.type === 'error' ? " outline-red-600" : "") +
                 (toast.type === 'success' ? " outline-green-600" : "")
             }>
-            <IconButton type="button" className="absolute top-2 right-2 rounded-lg" onClick={(e) => handleClose(toast.id ?? '', e)}>
+            <IconButton type="button" className="absolute top-1 right-1 lg:top-2 lg:right-2 rounded-lg" onClick={(e) => handleClose(toast.id ?? '', e)}>
                 <X className="w-5 h-5" />
             </IconButton>
             <div className="flex flex-row gap-2 w-full items-center ">

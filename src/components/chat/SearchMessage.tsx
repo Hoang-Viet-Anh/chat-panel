@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp, Search, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMatchedMessage } from "@/lib/redux/slices/chatRoomSlice";
+import { setIsSearchActive } from "@/lib/redux/slices/appSlice";
 
 export default function SearchMessage() {
-    const [isActive, setIsActive] = useState(false);
+    const isActive = useSelector((state: any) => state.app.isSearchActive);
     const [searchResults, setSearchResults] = useState<Message[]>([]);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [searchText, setSearchText] = useState('');
@@ -36,7 +37,7 @@ export default function SearchMessage() {
             setSearchResults([]);
             return;
         }
-        const filteredMessages = messages.filter((message: Message) => message.content.toLowerCase().includes(searchText.toLowerCase())).reverse();
+        const filteredMessages = messages.filter((message: Message) => message.content.toLowerCase().includes(searchText.toLowerCase()));
         setSearchResults(filteredMessages);
     }
 
@@ -56,9 +57,9 @@ export default function SearchMessage() {
 
     return (
         <div className="flex flex-row w-full items-center justify-end gap-2">
-            <div className={`flex flex-row gap-2 transition-all duration-100 ${isActive ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
+            <div className={`flex flex-row gap-2 transition-all duration-100 ${isActive ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0 hidden lg:flex"}`}>
                 <div className="flex flex-row items-center">
-                    <p className="text-nowrap mr-1">{searchResults.length > 0 ? `${currentMessageIndex + 1} of ${searchResults.length}` : 'No results found'}</p>
+                    <p className="text-nowrap mr-1">{searchResults.length > 0 ? `${currentMessageIndex + 1} of ${searchResults.length}` : '0 of 0'}</p>
                     <IconButton type="button" className="rounded-lg" onClick={handleNextMessage} disabled={currentMessageIndex >= searchResults.length - 1}>
                         <ChevronUp className="w-5 h-5" />
                     </IconButton>
@@ -74,10 +75,10 @@ export default function SearchMessage() {
                     </IconButton>
                 </form>
             </div>
-            <IconButton type="button" className="rounded-lg" onClick={() => { setIsActive(!isActive) }}>
+            <IconButton type="button" className="rounded-lg" onClick={() => dispatch(setIsSearchActive(!isActive))}>
                 {isActive ?
-                    <X className="w-5 h-5" /> :
-                    <Search className="w-5 h-5" />
+                    <X className="lg:w-5 lg:h-5" /> :
+                    <Search className="lg:w-5 lg:h-5" />
                 }
             </IconButton>
         </div >
