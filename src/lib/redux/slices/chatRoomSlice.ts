@@ -25,7 +25,7 @@ const ChatRoomSlice = createSlice({
             state.messages = action.payload;
         },
         addMessage: (state, action: PayloadAction<Message>) => {
-            state.messages.push(action.payload);
+            state.messages.unshift(action.payload);
         },
         clearChatRoom: (state) => {
             state.currentUser = null;

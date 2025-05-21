@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 
 export default function ChatInput() {
     const { chatId } = useParams();
-    const dispatch = useDispatch();
     const [sendMessage, { isError }] = useSendMessageMutation();
     const [textInput, setTextInput] = useState('');
     const { addToast } = useToast();
@@ -32,11 +31,6 @@ export default function ChatInput() {
         const text = textInput.trim();
 
         if (text.length > 0) {
-            dispatch(addMessage({
-                chatId: chatId?.toString(),
-                content: text,
-                status: MessageStatus.PENDING,
-            }));
             setTextInput('');
             sendMessage({
                 chatId,
