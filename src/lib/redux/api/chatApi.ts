@@ -4,9 +4,7 @@ import { User } from '@/lib/redux/types/User';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { UnreadCounts } from '../types/UnreadCounts';
 
-console.log('process.env.NEXT_PUBLIC_API_URL', process.env.NEXT_PUBLIC_API_URL);
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-
 
 export const chatApi = createApi({
     reducerPath: 'chatApi',

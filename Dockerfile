@@ -16,6 +16,7 @@ FROM node:20-alpine AS runner
 
 # Set NODE_ENV to production
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_API_URL=https://api-chat.crocondine.cloud
 
 WORKDIR /app
 
