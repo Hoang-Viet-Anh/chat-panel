@@ -12,7 +12,7 @@ import { setCurrentUser, setMessages } from "@/lib/redux/slices/chatRoomSlice";
 import { chatApi, useGetChatQuery } from "@/lib/redux/api/chatApi";
 import { UnreadCounts } from "@/lib/redux/types/UnreadCounts";
 import IconButton from "@/components/ui/IconButton";
-import { ArrowLeft, EllipsisVertical } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function ChatDialog() {
     const { chatId } = useParams();
@@ -85,7 +85,7 @@ export default function ChatDialog() {
                 </div>
             </div>
             <div className="flex flex-col-reverse h-full w-full py-4 px-3 overflow-y-auto">
-                {isLoading || !isSuccess || (amount && amount > 0) ? null : <ChatHistory />}
+                {<ChatHistory />}
             </div>
             <ChatInput />
         </>

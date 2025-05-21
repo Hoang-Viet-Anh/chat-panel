@@ -43,7 +43,6 @@ const useSocket = () => {
     const handleNewMessage = (message: Message) => {
         const currentChatId = currentChatRef.current;
         if (currentChatId === message.chatId) {
-            dispatch(addMessage(message));
             dispatch(chatApi.util.invalidateTags([{ type: 'message', id: message.chatId }]));
         } else {
             const sender = usersRef.current.find(user => user._id === message.sender);

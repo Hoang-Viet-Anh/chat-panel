@@ -46,7 +46,7 @@ export default function NavigationElement({ user, isNotification }: NavigationEl
                         onError={(e) => {
                             (e.target as HTMLImageElement).src = '/user-round1.svg';
                         }}
-                        alt="user avatar"
+                        alt=""
                         className="w-10 h-10 object-cover rounded-full bg-white" />
                     <div className="flex flex-col gap-1 items-start w-full overflow-hidden">
                         <h1 className="text-base truncate w-full max-w-2xs">{`${user.firstName} ${user.lastName}`}</h1>
